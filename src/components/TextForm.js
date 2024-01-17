@@ -127,30 +127,34 @@ const TextForm = (props) => {
             style={{
               position: "absolute",
               bottom: 0,
-              height: "1.5rem",
+              height: "2rem",
               display: "flex",
               alignItems: "center",
 
               border: "1px solid black",
             }}
             onClick={handleClearClick}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#d3d3dd")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "")}
           >
-            Clear Console
+            🆑
           </button>
           <button
             className="btn btn-tranparent "
             style={{
               position: "absolute",
-              bottom: 0,
-              height: "1.5rem",
+              bottom: 30,
+              height: "2rem",
               display: "flex",
               alignItems: "center",
-              left: "17.5%",
+
               border: "1px solid black",
             }}
             onClick={handleUndo}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#d3d3dd")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "")}
           >
-            Undo
+            🔄
           </button>
         </div>
         <div className="">
