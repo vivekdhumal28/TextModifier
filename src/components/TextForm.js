@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import Elaborate from "./Elaborate";
+import Replace from "./Replace";
 
 const TextForm = (props) => {
   const [text, setText] = useState("Enter your text here to modify");
@@ -88,6 +90,11 @@ const TextForm = (props) => {
     setText(capitalSentence);
   };
 
+  const handleReplace = ({ replaceText, withText }) => {
+    const newText = text.replace(new RegExp(replaceText, "g"), withText);
+    setText(newText);
+  };
+
   return (
     <>
       <div className="container">
@@ -123,7 +130,7 @@ const TextForm = (props) => {
             rows="8"
           ></textarea>
           <button
-            className="btn btn-tranparent mx-0 "
+            className="btn btn-tranparent mx-0"
             style={{
               position: "absolute",
               bottom: 0,
@@ -157,39 +164,48 @@ const TextForm = (props) => {
             🔄
           </button>
         </div>
-        <div className="">
-          <button className="btn btn-dark mx-2" onClick={handleClickUp}>
-            UPPERCASE
-          </button>
-          <button className="btn btn-dark mx-2" onClick={handleClickDown}>
-            lowercase
-          </button>
+        <div className="row row-cols-1">
+          <div className="col">
+            <button className="btn btn-dark mx-1 my-1" onClick={handleClickUp}>
+              UPPERCASE
+            </button>
+            <button
+              className="btn btn-dark mx-1 my-1"
+              onClick={handleClickDown}
+            >
+              lowercase
+            </button>
 
-          <button className="btn btn-dark mx-2" onClick={handleExtraSpaces}>
-            Remove Spaces
-          </button>
-          <button className="btn btn-dark mt-1" onClick={handleTextSppech}>
-            Speech
-          </button>
-          <button className="btn btn-dark mx-2" onClick={handleCapitalizeWords}>
-            Capitalize Words
-          </button>
-          <button
-            className="btn btn-dark mx-2"
-            onClick={handleCapitalizeSentences}
-          >
-            Capitalize Sentences
-          </button>
+            <button
+              className="btn btn-dark mx-1 my-1"
+              onClick={handleExtraSpaces}
+            >
+              Remove Spaces
+            </button>
+            <button
+              className="btn btn-dark mx-1 my-1"
+              onClick={handleTextSppech}
+            >
+              Speech
+            </button>
+            <button
+              className="btn btn-dark mx-1 my-1"
+              onClick={handleCapitalizeWords}
+            >
+              Capitalize Words
+            </button>
+            <button
+              className="btn btn-dark mx-1 my-1"
+              onClick={handleCapitalizeSentences}
+            >
+              Capitalize Sentences
+            </button>
+          </div>
         </div>
       </div>
-      <div className="container my-3">
-        <h2>Your text summary</h2>
-        <p>{text.split(" ").length} words</p>
-        <p>{text.length} characters</p>
-        <p>{0.008 * text.split(" ").length} Minutes need to read</p>
-        <h2>Preview</h2>
-        <p>{text ? text : "Check preview here"}</p>
-      </div>
+
+      <Replace onReplace={handleReplace} />
+      <Elaborate text={text} />
     </>
   );
 };
